@@ -1,0 +1,32 @@
+# Paper server with plugins example
+name: paper-survival
+minecraft_version: "1.21.1"
+
+loader:
+  type: paper
+
+java:
+  version: "21"
+  memory: "6G"
+
+server:
+  difficulty: hard
+  gamemode: survival
+  max_players: 50
+  online_mode: true
+  pvp: true
+  motd: "§cHard Mode §7| §bPaper 1.21.1"
+  view_distance: 10
+
+plugins:
+  - id: luckperms
+    source: modrinth
+    version: "*"
+
+  - id: essentialsx
+    source: modrinth
+    version: "*"
+
+  - id: worldedit
+    source: modrinth
+    version: "*"

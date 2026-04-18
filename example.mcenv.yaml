@@ -1,0 +1,82 @@
+# mcenv.yaml — Complete Minecraft server environment definition
+# Run: mcenv up -f example.mcenv.yaml -o ./my-server
+
+name: survival-fabric-1.21
+minecraft_version: "1.21.1"
+
+loader:
+  type: fabric
+  version: ">=0.16.0"   # semver range — resolves to latest satisfying this
+
+java:
+  version: "21"
+  memory: "4G"          # sets both -Xms and -Xmx; or use flags[] for fine control
+
+server:
+  difficulty: normal
+  gamemode: survival
+  max_players: 20
+  online_mode: true
+  pvp: true
+  motd: "§6Survival §7| §bFabric 1.21.1 §7| §aVanilla+"
+  view_distance: 12
+  simulation_distance: 8
+  seed: "8675309"        # deterministic world generation
+
+world:
+  seed: "8675309"
+
+# Files in ./configs/ are copied into the server directory on every install.
+# Structure mirrors the server layout — put your plugin/mod configs here
+# and commit them to git. They override anything mcenv generates.
+#
+#   configs/
+#     server.properties              ← overrides the generated one
+#     plugins/
+#       LuckPerms/config.yml
+#     config/
+#       lithium.properties
+#       sodium-options.json
+config_dir: ./configs
+
+mods:
+  # Fabric API — required by almost all Fabric mods
+  - id: fabric-api
+    source: modrinth
+    version: "*"          # latest compatible with MC 1.21.1
+
+  # Performance mods
+  - id: lithium
+    source: modrinth
+    version: "*"
+
+  - id: sodium
+    source: modrinth
+    version: "*"
+
+  - id: starlight
+    source: modrinth
+    version: ">=1.1.0"
+    required: false       # not ported to 1.21.1 yet — skip gracefully
+
+  # QOL mods
+  - id: inventory-profiles-next
+    source: modrinth
+    version: "*"
+    required: false       # skip gracefully if not available for this MC version
+
+  # Direct URL (for private/unlisted mods)
+  # - id: my-private-mod
+  #   source: url
+  #   version: "1.0.0"
+  #   url: https://example.com/mods/my-mod-1.0.0.jar
+
+  # Local file (for development mods)
+  # - id: wip-mod
+  #   source: local
+  #   version: "dev"
+  #   path: ../my-mod/build/libs/my-mod-dev.jar
+
+hooks:
+  post_install: "echo 'Server installed! Run ./start.sh to launch.'"
+  pre_start: "echo 'Starting server…'"

@@ -1,0 +1,8 @@
+node_modules/
+dist/
+bundle.cjs
+mcenv-linux
+mcenv-macos
+mcenv-win.exe
+mcenv.lock.json
+*.log
