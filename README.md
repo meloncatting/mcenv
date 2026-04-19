@@ -1,5 +1,6 @@
-# mcenv
-
+# McEnv
+Docker for block game servers
+---
 Reproducible Minecraft server environments — define your entire server in one config file and reproduce it anywhere with one command.
 
 ## Install
